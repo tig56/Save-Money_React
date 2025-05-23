@@ -8,8 +8,8 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<MainMenu />} />
-      <Route path="/child" element={<ChildApp />} />
-      <Route path="/grandpa" element={<GrandpaApp />} />
+      <Route path="child" element={<ChildApp />} />
+      <Route path="grandpa" element={<GrandpaApp />} />
     </Routes>
   );
 }
