@@ -11,11 +11,11 @@ const MainMenu = () => {
       <h1>メインメニュー</h1>
       <div className="menu-items">
         <div className="menu-item" onClick={() => navigate("/child")}>
-          <img src="/child.png" alt="こども" className="menu-img" />
+          <img src="/Save-Money_React/child.png" alt="こども" className="menu-img" />
           <p>貯金管理アプリ</p>
         </div>
         <div className="menu-item" onClick={() => navigate("/grandpa")}>
-          <img src="/grandpa.png" alt="おじいちゃん" className="menu-img" />
+          <img src="/Save-Money_React/grandpa.png" alt="おじいちゃん" className="menu-img" />
           <p>資産管理アプリ</p>
         </div>
       </div>
