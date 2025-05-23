@@ -37,7 +37,7 @@ function ChildApp() {
 
   return (
     <div className="container">
-      <h1>貯蓄管理アプリ</h1>
+      <h1>貯金管理アプリ</h1>
       <button onClick={addTable}>表を追加</button>
       <div>
         {tables.map((table) => (

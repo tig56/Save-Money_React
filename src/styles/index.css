@@ -118,7 +118,7 @@ h2 {
   color: #0077cc;
 }
 
-/* 貯蓄管理アプリの「表を追加」ボタン */
+/* 貯金管理アプリの「表を追加」ボタン */
 button {
   font-weight: bold;
   padding: 8px 16px;
@@ -169,7 +169,7 @@ button:hover {
 .deleteTableBtn {
   margin-left: auto;
   margin-top: 8px;
-  width: 96px;
+  width: 144px;
   padding: 4px 12px;
   font-size: 14px;
   background-color: #ccc;
