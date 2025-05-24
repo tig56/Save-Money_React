@@ -22,7 +22,7 @@ function ChildApp() {
         id: Date.now(),
         year: new Date().getFullYear(),
         bank: '三菱UFJ銀行',
-        months: Array(12).fill({ goal: 0, result: 0 }),
+        months: Array.from({ length: 12 }, () => ({ goal: 0, result: 0 })),
       },
     ]);
   };
@@ -63,8 +63,9 @@ function SavingsTable({ data, onUpdate, onDelete }) {
   }, [year, bank, months]);
 
   const handleMonthChange = (index, field, value) => {
+    const numValue = value === '' ? 0 : Number(value);
     const updatedMonths = months.map((month, i) =>
-      i === index ? { ...month, [field]: Number(value) } : month
+      i === index ? { ...month, [field]: numValue } : month
     );
     setMonths(updatedMonths);
   };
@@ -110,7 +111,7 @@ function SavingsTable({ data, onUpdate, onDelete }) {
             </td>
             <td>{totalGoal}</td>
             <td>{totalResult}</td>
-            <td style={{ color: totalDiff >= 0 ? 'green' : 'red' }}>
+            <td className={totalDiff >= 0 ? 'positive' : 'negative'}>
               {totalDiff}
             </td>
           </tr>
@@ -135,6 +136,7 @@ function SavingsTable({ data, onUpdate, onDelete }) {
                   <input
                     type="number"
                     value={month.goal}
+                    onFocus={(e) => e.target.select()}
                     onChange={(e) =>
                       handleMonthChange(index, 'goal', e.target.value)
                     }
@@ -144,12 +146,15 @@ function SavingsTable({ data, onUpdate, onDelete }) {
                   <input
                     type="number"
                     value={month.result}
+                    onFocus={(e) => e.target.select()}
                     onChange={(e) =>
                       handleMonthChange(index, 'result', e.target.value)
                     }
                   />
                 </td>
-                <td style={{ color: diff >= 0 ? 'green' : 'red' }}>{diff}</td>
+                <td className={diff >= 0 ? 'positive' : 'negative'}>
+                  {diff}
+                </td>
               </tr>
             );
           })}
