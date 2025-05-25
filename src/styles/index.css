@@ -41,12 +41,14 @@ body {
   margin-bottom: 24px;
   background: #f3ede5;
   cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 .card:hover {
   transform: scale(1.02);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* 画像 */
@@ -111,7 +113,8 @@ table {
   border-collapse: collapse;
   margin: 8px 0 12px;
 }
-th, td {
+th,
+td {
   border: 1px solid #ccc;
   padding: 8px;
   text-align: center;
@@ -220,7 +223,7 @@ h2 {
   height: 36px;
   padding: 0 8px;
   font-size: 14px;
-  margin-top:6px;
+  margin-top: 6px;
   background-color: #ccc !important;
   border-radius: 6px;
   color: #333;

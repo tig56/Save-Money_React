@@ -1,7 +1,7 @@
 // src/components/MainMenu.jsx
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import '../styles/index.css';
+import "../styles/index.css";
 
 const MainMenu = () => {
   const navigate = useNavigate();
@@ -9,7 +9,8 @@ const MainMenu = () => {
   return (
     <div className="container main-menu">
       <h1>
-        お金の管理アプリ<br />
+        お金の管理アプリ
+        <br />
         メインメニュー
       </h1>
 
@@ -25,7 +26,11 @@ const MainMenu = () => {
         </div>
       </div>
 
-      <div className="card" id="grandpaBtn" onClick={() => navigate("/grandpa")}>
+      <div
+        className="card"
+        id="grandpaBtn"
+        onClick={() => navigate("/grandpa")}
+      >
         <img
           src="/Save-Money_React/grandpa.png"
           alt="資産管理アプリのアイコン（おじいちゃん）"

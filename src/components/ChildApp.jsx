@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import '../styles/index.css';
+import React, { useState, useEffect } from "react";
+import "../styles/index.css";
 
 function ChildApp() {
   const [tables, setTables] = useState([]);
 
   useEffect(() => {
-    const saved = localStorage.getItem('savingsTables');
+    const saved = localStorage.getItem("savingsTables");
     if (saved) {
       setTables(JSON.parse(saved));
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('savingsTables', JSON.stringify(tables));
+    localStorage.setItem("savingsTables", JSON.stringify(tables));
   }, [tables]);
 
   const addTable = () => {
@@ -21,7 +21,7 @@ function ChildApp() {
       {
         id: Date.now(),
         year: new Date().getFullYear(),
-        bank: '三菱UFJ銀行',
+        bank: "三菱UFJ銀行",
         months: Array.from({ length: 12 }, () => ({ goal: 0, result: 0 })),
       },
     ]);
@@ -63,10 +63,13 @@ function SavingsTable({ data, onUpdate, onDelete }) {
   }, [year, bank, months]);
 
   const handleMonthChange = (index, field, value) => {
-    const numValue = value === '' ? 0 : Number(value);
-    const updatedMonths = months.map((month, i) =>
-      i === index ? { ...month, [field]: numValue } : month
-    );
+    const updatedMonths = months.map((month, i) => {
+      if (i === index) {
+        let newValue = value === "" ? "" : parseFloat(value);
+        return { ...month, [field]: newValue };
+      }
+      return month;
+    });
     setMonths(updatedMonths);
   };
 
@@ -111,7 +114,7 @@ function SavingsTable({ data, onUpdate, onDelete }) {
             </td>
             <td>{totalGoal}</td>
             <td>{totalResult}</td>
-            <td className={totalDiff >= 0 ? 'positive' : 'negative'}>
+            <td className={totalDiff >= 0 ? "positive" : "negative"}>
               {totalDiff}
             </td>
           </tr>
@@ -138,7 +141,7 @@ function SavingsTable({ data, onUpdate, onDelete }) {
                     value={month.goal}
                     onFocus={(e) => e.target.select()}
                     onChange={(e) =>
-                      handleMonthChange(index, 'goal', e.target.value)
+                      handleMonthChange(index, "goal", e.target.value)
                     }
                   />
                 </td>
@@ -148,13 +151,11 @@ function SavingsTable({ data, onUpdate, onDelete }) {
                     value={month.result}
                     onFocus={(e) => e.target.select()}
                     onChange={(e) =>
-                      handleMonthChange(index, 'result', e.target.value)
+                      handleMonthChange(index, "result", e.target.value)
                     }
                   />
                 </td>
-                <td className={diff >= 0 ? 'positive' : 'negative'}>
-                  {diff}
-                </td>
+                <td className={diff >= 0 ? "positive" : "negative"}>{diff}</td>
               </tr>
             );
           })}

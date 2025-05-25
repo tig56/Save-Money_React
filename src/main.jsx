@@ -9,5 +9,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <BrowserRouter basename="/Save-Money_React">
       <App />
     </BrowserRouter>
-  </React.StrictMode>
+  </React.StrictMode>,
 );
