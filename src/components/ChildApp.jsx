@@ -22,7 +22,7 @@ function ChildApp() {
         id: Date.now(),
         year: new Date().getFullYear(),
         bank: "三菱UFJ銀行",
-        months: Array.from({ length: 12 }, () => ({ goal: 0, result: 0 })),
+        months: Array.from({ length: 12 }, () => ({ goal: "0", result: "0" })),
       },
     ]);
   };
@@ -65,16 +65,26 @@ function SavingsTable({ data, onUpdate, onDelete }) {
   const handleMonthChange = (index, field, value) => {
     const updatedMonths = months.map((month, i) => {
       if (i === index) {
-        let newValue = value === "" ? "" : parseFloat(value);
-        return { ...month, [field]: newValue };
+        if (value === "") {
+          return { ...month, [field]: "" };
+        }
+        let numValue = Number(value);
+        if (isNaN(numValue) || numValue < 0) numValue = 0;
+        return { ...month, [field]: String(numValue) };
       }
       return month;
     });
     setMonths(updatedMonths);
   };
 
-  const totalGoal = months.reduce((sum, m) => sum + m.goal, 0);
-  const totalResult = months.reduce((sum, m) => sum + m.result, 0);
+  const totalGoal = months.reduce(
+    (sum, m) => sum + Number(m.goal || 0),
+    0
+  );
+  const totalResult = months.reduce(
+    (sum, m) => sum + Number(m.result || 0),
+    0
+  );
   const totalDiff = totalResult - totalGoal;
 
   return (
@@ -138,6 +148,7 @@ function SavingsTable({ data, onUpdate, onDelete }) {
                 <td>
                   <input
                     type="number"
+                    min={0}
                     value={month.goal}
                     onFocus={(e) => e.target.select()}
                     onChange={(e) =>
@@ -148,6 +159,7 @@ function SavingsTable({ data, onUpdate, onDelete }) {
                 <td>
                   <input
                     type="number"
+                    min={0}
                     value={month.result}
                     onFocus={(e) => e.target.select()}
                     onChange={(e) =>

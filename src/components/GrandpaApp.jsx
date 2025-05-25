@@ -13,32 +13,40 @@ const BANK_OPTIONS = [
 const GrandpaApp = () => {
   const [assets, setAssets] = useState([]);
 
-  // ロード時にlocalStorageから復元
   useEffect(() => {
     const saved = localStorage.getItem("grandpaAssets");
     if (saved) setAssets(JSON.parse(saved));
   }, []);
 
-  // assets更新時にlocalStorageに保存
   useEffect(() => {
     localStorage.setItem("grandpaAssets", JSON.stringify(assets));
   }, [assets]);
 
   const addBank = () => {
-    setAssets([...assets, { bank: BANK_OPTIONS[0], amount: 0 }]);
+    setAssets([...assets, { bank: BANK_OPTIONS[0], amount: "0" }]);
   };
 
   const updateAsset = (index, key, value) => {
     const newAssets = [...assets];
     if (key === "amount") {
-      // 数値化＋負の値を防止
-      const num = Number(value);
-      newAssets[index][key] = isNaN(num) || num < 0 ? 0 : num;
+      // 空文字は許容（入力途中）
+      if (value === "") {
+        newAssets[index][key] = "";
+      } else {
+        // 先頭が0かつ複数桁なら先頭の0を除去
+        if (value.length > 1 && value.startsWith("0")) {
+          value = value.replace(/^0+/, ""); // 例: "0123" → "123"
+        }
+  
+        const num = Number(value);
+        newAssets[index][key] = isNaN(num) || num < 0 ? "0" : value;
+      }
     } else {
       newAssets[index][key] = value;
     }
     setAssets(newAssets);
   };
+  
 
   const deleteAsset = (index) => {
     setAssets(assets.filter((_, i) => i !== index));
@@ -87,7 +95,7 @@ const GrandpaApp = () => {
                     type="number"
                     value={asset.amount}
                     onFocus={(e) => {
-                      if (asset.amount === 0) e.target.value = "";
+                      if (asset.amount === "0") e.target.value = "";
                     }}
                     onChange={(e) => updateAsset(i, "amount", e.target.value)}
                   />
