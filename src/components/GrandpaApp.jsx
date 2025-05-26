@@ -33,7 +33,6 @@ const GrandpaApp = () => {
       if (value === "") {
         newAssets[index][key] = "";
       } else {
-        // 先頭が0かつ複数桁なら先頭の0を除去
         if (value.length > 1 && value.startsWith("0")) {
           value = value.replace(/^0+/, ""); // 例: "0123" → "123"
         }
